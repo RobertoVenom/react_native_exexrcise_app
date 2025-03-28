@@ -38,3 +38,5 @@ export default function DurationExercise({ route, navigation }) {
     </View>
   );
 }
+
+export default DurationExercise;
