@@ -24,5 +24,4 @@ export default function RepetitionExercise({ route, navigation }) {
     </View>
   );
 }
-
 export default RepetitionExercise;
