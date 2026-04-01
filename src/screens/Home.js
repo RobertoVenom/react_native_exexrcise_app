@@ -1,22 +1,21 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { Button } from 'react-native-elements';
+import { exercises } from '../data/exercises';
 
-const Home = ({ navigation }) => {
-  const exercises = [
-    { id: '1', name: 'Push-ups', type: 'repetition', suggestedExercise: 'Squats' },
-    { id: '2', name: 'Squats', type: 'repetition', suggestedExercise: 'Push-ups' },
-    { id: '3', name: 'Running', type: 'duration', suggestedExercise: 'Jumping Jacks' },
-    { id: '4', name: 'Jumping Jacks', type: 'duration', suggestedExercise: 'Running' },
-  ];
+export default function Home({ navigation }) {
 
   const renderItem = ({ item }) => (
     <Button
       title={item.name}
-      onPress={() => navigation.navigate(item.type === 'repetition' ? 'RepetitionExercise' : 'DurationExercise', {
-        exercise: item,
-        exercises,
-      })}
+      onPress={() => {
+        if (item.type === 'reps') {
+          navigation.push('Reps', { exercise: item, exercises });
+        } else {
+          navigation.push('Duration', { exercise: item, exercises });
+        }
+      }}
+      containerStyle={{ margin: 10 }}
     />
   );
 
@@ -25,10 +24,10 @@ const Home = ({ navigation }) => {
       <FlatList
         data={exercises}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
       />
     </View>
   );
-};
+}
 
 export default Home;
